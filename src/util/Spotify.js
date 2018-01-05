@@ -50,8 +50,9 @@ Spotify.search = function(term) {
   )
 }
 
-Spotify.savePlayList = function(playListName, tracksURIs) {
-  if (!playListName && !tracksURIs) {
+Spotify.savePlayList = async function(playListName, tracksURIs) {
+
+  if (!playListName || !tracksURIs.length) {
     return;
   }
   const userAccessToken = Spotify.getAccessToken();
