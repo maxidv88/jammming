@@ -51,7 +51,7 @@ Spotify.search = function(term) {
 }
 
 Spotify.savePlayList = function(playListName, tracksURIs) {
-  if (!playListName && !tracksURIs) {
+  if (!playListName || !tracksURIs.length) {
     return;
   }
   const userAccessToken = Spotify.getAccessToken();
