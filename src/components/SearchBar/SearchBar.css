@@ -22,6 +22,7 @@
 }
 
 .SearchBar a {
+  margin-left: 10px;
   cursor: pointer;
   width: 8.11rem;
   padding: .77rem 0;

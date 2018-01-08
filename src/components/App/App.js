@@ -8,26 +8,15 @@ import Spotify from '../../util/Spotify.js';
 class App extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { searchResults: [/*{ name: 'Black and white',
-                                    artist: 'Michael Jackson',
-                                    album: 'Black and White',
-                                    id: 2,
-                                    uri: 'sdsdffa2424'
-                                  }*/],
+    this.state = { searchResults: [],
                   playListName: 'jammmingPlaylist',
-                  playListTracks: [/*{ name: 'Need to Believe',
-                  artist: 'Gotthard',
-                  album: 'Need to believe',
-                  id: 1,
-                  uri: 'sdsdffa242446gk'
-                }*/]
+                  playListTracks: []
     };
     this.addTrack = this.addTrack.bind(this);
     this.removeTrack = this.removeTrack.bind(this);
     this.updatePlayListName = this.updatePlayListName.bind(this);
     this.savePlayList = this.savePlayList.bind(this);
     this.search = this.search.bind(this);
-
   }
 
   addTrack(newTrack) {
@@ -40,7 +29,7 @@ class App extends React.Component {
     if (notExist) { //add the track
       let newPlayListTracks = this.state.playListTracks;
       newPlayListTracks.push(newTrack);
-      this.setState( {playListTracks: newPlayListTracks})
+      this.setState( {playListTracks: newPlayListTracks});
     }
 
   }
@@ -50,6 +39,11 @@ class App extends React.Component {
         track.id !== trackToRemove.id
     );
     this.setState( {playListTracks: newPlayListTracks} );
+    const index = this.state.searchResults.indexOf(trackToRemove);
+    let newSearchResults = this.state.searchResults;
+    newSearchResults[index].id = Math.random().toString();
+    console.log(newSearchResults);
+    this.setState( {searchResults: newSearchResults} );
   }
 
   updatePlayListName(name) {
