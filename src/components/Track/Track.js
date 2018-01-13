@@ -18,30 +18,33 @@ class Track extends React.Component {
 
   removeTrack(event) {
     this.props.onRemove(this.props.track);
-    this.setState({hide: false});
+    //this.setState({hide: false}); it's not needed
   }
 
   className() {
-  let className = 'Track';
-  if (this.state.hide === true) {
-    className+= ' Track-hide';
+    return this.state.hide ? 'Track Track-hide' : 'Track';
   }
-  return className;
-}
 
-
-
-//<a className="Track-action" onClick={this.addTrack}> + </a>
 
   render() {
+    let previewTrack = ''; // this variable show the track preview if available
+    if (this.props.track.previewUrl !== null) {
+      previewTrack = (
+        <div className="Preview-audio">
+          <audio controls preload="none">
+            <source src={this.props.track.previewUrl} type="audio/ogg" />
+          </audio>
+        </div>
+      )
+
+    }
+
     return(
       <div className={this.className()}>
         <div className="Track-information">
           <h3>{this.props.track.name}</h3>
           <p>{this.props.track.artist} | {this.props.track.album}</p>
-          <audio controls preload="none">
-            <source src={this.props.track.previewUrl} type="audio/ogg" />
-          </audio>
+          {previewTrack}
         </div>
         <a className='Track-action' onClick={this.props.isRemoval ? this.removeTrack : this.addTrack}>{this.props.isRemoval ? '-' : '+'}</a>
 

@@ -24,9 +24,15 @@ class SearchBar extends React.Component{
     this.setState({ term: event.target.value });
   }
 
+  searchBarClass() {
+    return this.props.userLoggedIn ? 'SearchBar' : 'SearchBar Hide';
+
+  }
+
   render() {
+
     return(
-      <div className="SearchBar">
+      <div className={this.searchBarClass()}>
         <form onSubmit={this.search}>
           <input onChange={this.handleTermChange} placeholder="Enter A Song, Album, or Artist" />
         </form>

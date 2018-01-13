@@ -14,12 +14,16 @@ class PlayList extends React.Component{
     this.props.onNameChange(event.target.value);
   }
 
+  showAlert() {
+    alert('Please, login first');
+  }
+
   render() {
     return(
         <div className="Playlist">
           <input value={this.props.playListName} onChange={this.handleNameChange}/>
           <TrackList tracks={this.props.playListTracks} onRemove={this.props.onRemove} isRemoval={true}/>
-          <a className="Playlist-save" onClick={this.props.onSave} >SAVE TO SPOTIFY</a>
+          <a className="Playlist-save" onClick={this.props.userLoggedIn ? this.props.onSave : this.showAlert  } >SAVE TO SPOTIFY</a>
         </div>
     );
   }
